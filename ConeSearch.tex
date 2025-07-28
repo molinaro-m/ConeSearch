@@ -167,11 +167,17 @@ the following requirements:
 				\item[Example]
 					\url{http://mycone.org/cgi-bin/search?RA=180.567&DEC=-30.45&SR=0.0125}
 			\end{bigdescription}
-		\item As defined by DALI a service SHOULD also understand the following parameter:
+		\item As defined by DALI a service SHOULD also understand the following parameters:
 			\begin{description}
 				\item[\textbf{MAXREC}] to let the client limit the number of records returned
 					or require a service metadata response. Its usage is encouraged and preferred
 					to the SR=0 solution for metadata discovery.
+				\item[\textbf{RESPONSEFORMAT}] to allow alternative optional response
+					formats other than the mandatory VOTable one. Indeed, a Simple
+					Cone Search service MUST provide responses in VOTable format \citep{2025ivoa.spec.0116O},
+					compliant with respect to what will
+					be detailed in the next subsection (Sec. 2.2), but should also
+					support the DALI RESPONSEFORMAT parameter.
 			\end{description}
 		\item The query MAY contain the optional parameter,
 			\textbf{VERB}, whose value is an integer--either 1, 2, or 3--indicating
@@ -218,6 +224,11 @@ the following requirements:
 				compatibility this is still allowed but discouraged.
 		\end{bigdescription}
 		
+		The response format may be other than VOTable when requested using
+		the RESPONSEFORMAT query parameter described in Sec. 2.1. Mime-type
+		of the response will vary accordingly to the output format, as
+		prescribed by DALI Sec.3.4.3.
+
 		The VOTable MUST comply with these conditions:
 
 		\begin{itemize}
@@ -239,7 +250,8 @@ the following requirements:
 					\item Exactly one FIELD must have ucd="pos.eq.dec;meta.main",
 						representing the declination of the source in the ICRS coordinate system.
 					\item The above right-ascension and declination FIELD(s) must have the datatype
-						attribute set to float or double, following the VOTable standard \citep{2019ivoa.spec.1021O}.
+						attribute set to float or double, following the VOTable
+						standard \citep{2025ivoa.spec.0116O}.
 				\end{itemize}
 			
 			\item The VOTable may include an expression of the
@@ -638,6 +650,18 @@ schemaas a formal part of the specification.
 
 \subsection*{Changes from WD-1.1-20200828}
 \begin{itemize}
+% 
+% remove the constraint of one RESOURCE only, clarifying it was there
+% only for the results
+%
+% added DALI MAXREC and RESPONSEFORMAT parameters, for response
+% flexibility and DALI alignment
+%
+% introduced flexibility on the decimal (float or double) behaviour for
+% RA and Dec in responses
+%
+% updated all UCD to conform to the UCD1+ specification
+%
 	\item embedded errata 1, 2 and 3 for ConeSearch-1.03
 	\item Complete revert of changes to restore clean 1.03 contents,
 		in view of specific minor updates (listed here above)
