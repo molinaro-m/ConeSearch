@@ -107,11 +107,14 @@ IVOA architecture \citep{2021ivoa.spec.1101D}.
 \label{sec:2}
 
 A service implementation that is compliant with this standard must meet
-the following requirements:
+the requirements described in the following 3 subsections
+(\ref{subsec:baseurl}, \ref{subsec:response}, and \ref{subsec:error}).
 
-\begin{enumerate}
-	\item the service must respond to a HTTP GET request
-		represented by a URL having two parts:\\ 
+\subsection{Query resource}
+\label{subsec:baseurl}
+
+The service must respond to a HTTP GET request
+represented by a URL having two parts:\\ 
 
 	\begin{itemize}
 		\item A base URL of the form\\
@@ -204,7 +207,10 @@ the following requirements:
 	A query following this syntax represents a request for
 	information on sources located within the specified cone on the sky.
 
-	\item The service must respond with an XML document in the VOTable
+\subsection{Succesful response}
+\label{subsec:response}
+
+	The service must respond with an XML document in the VOTable
 		format, that represents a table of astronomical sources whose positions
 		are within the cone (see Appendix \ref{appendix:a} for an example).
 		There may also be other sources outside the cone -- the service
@@ -266,8 +272,11 @@ the following requirements:
 			\item There may be other FIELDs in the table. Their specification should
 				include a description, data-type, and UCD.
 		\end{itemize}
-		
-	\item The service must respond with a stubbed version of the VOTable in the case
+	
+\subsection{Error response}
+\label{subsec:error}
+	
+The service must respond with a stubbed version of the VOTable in the case
 		of error. This must happen if the three required parameters (RA, DEC,
 		SR) are not all present, or if their values cannot be parsed to
 		floating-point numbers, or if the numbers are out of range (DEC=91.0,
@@ -349,7 +358,6 @@ the following requirements:
 		hemisphere. This type of query is different from an error return; it
 		should return a VOTable as described above, with metadata, but no data
 		records.
-\end{enumerate}
 
 \section{The Resource Profile}
 \label{sec:3} 
