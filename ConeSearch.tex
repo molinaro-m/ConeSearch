@@ -210,68 +210,82 @@ represented by a URL having two parts:\\
 \subsection{Succesful response}
 \label{subsec:response}
 
-	The service must respond with an XML document in the VOTable
-		format, that represents a table of astronomical sources whose positions
-		are within the cone (see Appendix \ref{appendix:a} for an example).
-		There may also be other sources outside the cone -- the service
-		implementor may decide on the exact search criterion used internally to
-		the service to select the sources. The base MIME-type of the HTTP
-		response should be \texttt{text/xml}. The more specific form
-		\texttt{text/xml;content=x-votable} may optionally be used. The
-		MIME-type, \texttt{text/xml;votable} shall also be considered legal (for
-		backward compatibility reasons); however, this value is strongly
-		discouraged as it is not compliant with the MIME-type standard
-		\citep{std:MIME}. Simple Cone Search services MUST return VOTable
-		version 1 documents.
-		
-		\begin{bigdescription}
-			\item[Editor's Note] The original NVO specification allowed a 
-				MIME-type of text/xml;votable, thus for backward
-				compatibility this is still allowed but discouraged.
-		\end{bigdescription}
-		
-		The response format may be other than VOTable when requested using
-		the RESPONSEFORMAT query parameter described in Sec. 2.1. Mime-type
-		of the response will vary accordingly to the output format, as
-		prescribed by DALI Sec.3.4.3.
+A successfull response from a Cone Search service \textbf{must} be a
+table containing the astronomical sources whose positions are within the
+cone described by the query parameter values described in
+Sec.~\ref{subsec:baseurl}. The service implementor may decide on the exact
+search criterion used to select the sources, including also other
+sources outside the cone.
+The response table \textbf{must} contain, alongside all possible columns
+available in the served source catalog:
+\begin{itemize}
+	\item one string column representing an ID for that record of the table.
+		This identifier may not be repeated in the table, and it could be used to
+		retrieve that same record again from that same table;
+	\item one numerical column representing the main value for the
+		right-ascension of the source in the ICRS coordinate system;
+	\item one numerical column representing the main value for the
+		declination of the source in the ICRS coordinate system.
+\end{itemize}
 
-		The VOTable MUST comply with these conditions:
+By default, the service \textbf{must} respond with an XML document in the
+VOTable\citep{2025ivoa.spec.0116O} format. However, if RESPONSEFORMAT is
+set (see Sec.~\ref{subsec:baseurl}) the response table \textbf{should}
+match the requested format, depending on the service capabilities.
 
-		\begin{itemize}
-			\item There must be a single RESOURCE with \texttt{type=''results''} in the VOTable,
-				and that RESOURCE must contain a single TABLE. Additional RESOURCE(s) are
-				allowed to enable, e.g., DataLink service descriptors.
-			\item The TABLE must have FIELDS where
-				the following UCD values have been set. There must only be one FIELD
-				with each of these UCDs:
-				
-				\begin{itemize}
-					\item Exactly one FIELD must have ucd="meta.id;meta.main",
-						with an array character type (fixed or variable
-						length), representing an ID string for that record of the table. This
-						identifier may not be repeated in the table, and it could be used to
-						retrieve that same record again from that same table.
-					\item Exactly one FIELD must have ucd="pos.eq.ra;meta.main",
-						representing the right-ascension of the source in the ICRS coordinate system.
-					\item Exactly one FIELD must have ucd="pos.eq.dec;meta.main",
-						representing the declination of the source in the ICRS coordinate system.
-					\item The above right-ascension and declination FIELD(s) must have the datatype
-						attribute set to float or double, following the VOTable
-						standard \citep{2025ivoa.spec.0116O}.
-				\end{itemize}
-			
-			\item The VOTable may include an expression of the
-				uncertainty of the positions given in the above mentioned fields to be
-				interpreted either as a positional error of the source positions, or an
-				angular size if the sources are resolved. If this uncertainty is not
-				provided, it should be taken to be zero; otherwise, it may be set for
-				all table entries with a PARAM in the RESOURCE which has a UCD that is
-				set to phys.angSize;obs and has a value which is the angle in decimal
-				degrees. Alternatively, a different value for each row in the table can
-				be given via a FIELD in the table having a UCD set to phys.angSize;obs.
-			\item There may be other FIELDs in the table. Their specification should
-				include a description, data-type, and UCD.
-		\end{itemize}
+When the response is in the default VOTable format (see Appendix \ref{appendix:a}
+for an example), the MIME-type of the HTTP response \textbf{should} be
+set to \texttt{application/x-votable+xml}. The form
+\texttt{text/xml} can optionally be used, while the
+form \texttt{text/xml;votable} shall be considered legal
+only for backward compatibility reasons
+\footnote{
+	The original NVO specification allowed a MIME-type of text/xml;votable,
+	this is why for backward compatibility this is still allowed but discouraged.
+}
+and is strongly discouraged as it is not compliant with the MIME-type
+standard \citep{std:MIME}. 
+
+Simple Cone Search services \textbf{MUST} return VOTable
+version 1 documents.
+
+The response in VOTable format \textbf{MUST} comply with these conditions:
+
+\begin{itemize}
+	\item There must be a single RESOURCE with \texttt{type=''results''} in the VOTable,
+		and that RESOURCE must contain a single TABLE. Additional RESOURCE(s) are
+		allowed to enable, e.g., DataLink service descriptors.
+	\item The TABLE must have FIELDS where
+		the following UCD values have been set. There must only be one FIELD
+		with each of these UCDs:
+
+	\begin{itemize}
+		\item Exactly one FIELD must have ucd="meta.id;meta.main",
+	 		with an array character type (fixed or variable
+			length), representing an ID string for that record of the table. This
+			identifier may not be repeated in the table, and it could be used to
+			retrieve that same record again from that same table.
+		\item Exactly one FIELD must have ucd="pos.eq.ra;meta.main",
+			representing the right-ascension of the source in the ICRS coordinate system.
+		\item Exactly one FIELD must have ucd="pos.eq.dec;meta.main",
+			representing the declination of the source in the ICRS coordinate system.
+		\item The above right-ascension and declination FIELD(s) must have the datatype
+			attribute set to float or double, following the VOTable
+			standard \citep{2025ivoa.spec.0116O}.
+	\end{itemize}
+
+	\item The VOTable may include an expression of the
+		uncertainty of the positions given in the above mentioned fields to be
+		interpreted either as a positional error of the source positions, or an
+		angular size if the sources are resolved. If this uncertainty is not
+		provided, it should be taken to be zero; otherwise, it may be set for
+		all table entries with a PARAM in the RESOURCE which has a UCD that is
+		set to phys.angSize;obs and has a value which is the angle in decimal
+		degrees. Alternatively, a different value for each row in the table can
+		be given via a FIELD in the table having a UCD set to phys.angSize;obs.
+	\item There may be other FIELDs in the table. Their specification should
+		include a description, data-type, and UCD.
+\end{itemize}
 	
 \subsection{Error response}
 \label{subsec:error}
