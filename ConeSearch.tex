@@ -289,89 +289,30 @@ The response in VOTable format \textbf{MUST} comply with these conditions:
 	
 \subsection{Error response}
 \label{subsec:error}
-	
-The service must respond with a stubbed version of the VOTable in the case
-		of error. This must happen if the three required parameters (RA, DEC,
-		SR) are not all present, or if their values cannot be parsed to
-		floating-point numbers, or if the numbers are out of range (DEC=91.0,
-		for example). The service may also make an error return if the search
-		radius (give by the SR parameter) is larger than the MaxSR parameter of
-		the Resource Profile (see Section \ref{sec:3}). In the case of error,
-		the service MUST respond with a VOTable that contains a PARAM element or
-		an INFO element with \texttt{name="Error"}, where thecorresponding value
-		attribute should contain some explanation of the nature of the error. No
-		other PARAM or INFO element in the response can be present having
-		\texttt{name=''Error''} set, but additional INFO and PARAM elements with
-		the name parameter set to a different value are allowed. If an INFO
-		element is used, it must appear as a direct child of one of the
-		following elements:
-		
-		\begin{itemize} 
-			\item the root VOTABLE element	(which is preferred by this document), or
-			\item the RESOURCE element
-		\end{itemize}
-		
-		If a PARAM element is used, it must appear as a direct
-		child of one of following elements:
-		
-		\begin{itemize}
-			\item the RESOURCE element, or
-			\item a DEFINITION element below the root VOTABLE element
-				(which is discouraged by this document).
-		\end{itemize}
 
-		\begin{bigdescription}
-			\item[Editor's Note]
-				It was recognized that this
-				requirement, as it was described in the original NVO specification, is
-				ambiguous about both the element to use for the ERROR message and its
-				location in the document. The VOTable standard allows PARAM and INFO
-				elements to appear in various places within the document. Since several
-				of the different methods have been used in practice by Cone Search
-				service implementations, no attempt is made in this version to correct
-				this ambiguity. All of the above-mentioned locations should be
-				considered legal, and Cone Search service clients should be prepared to
-				look in all of them for an ERROR message. The use of PARAM as a child of
-				DEFINITIONS is discouraged as the DEFINITIONS element was deprecated in
-				VOTable v1.1.
-		\end{bigdescription}
-		\begin{bigdescription}
-			\item[Example Error Responses]
-				Error INFO as child of VOTABLE (preferred)\\
-				
-			\begin{lstlisting}[language=XML,basicstyle=\footnotesize]			
-<VOTABLE xmlns="http://www.ivoa.net/xml/VOTable/v1.3">
-   <INFO ID="Error" name="Error" 
-    value="Field RA: 'as3f' is not a valid literal for RA"/>
-   <RESOURCE/>
-</VOTABLE> 
-			\end{lstlisting}
-			
-			Error PARAM as child of RESOURCE (allowed)
-			
-			\begin{lstlisting}[language=XML,basicstyle=\footnotesize]
-<?xml version="1.0"?>
-<!DOCTYPE VOTABLE SYSTEM "http://us-vo.org/xml/VOTable.dtd">
-<VOTABLE version="1.0">
-  <DESCRIPTION>
-    HEASARC Browse data service
-    Please send inquiries to mailto:request@athena.gsfc.nasa.gov
-  </DESCRIPTION>
-  <RESOURCE ID="error_resource">
-    <PARAM ID="Error" name="Error" datatype="char" arraysize="*"
-      value="Invalid data type: text/html"/>
-  </RESOURCE>
-</VOTABLE>
-			\end{lstlisting}
-		
-		\end{bigdescription}
-		
-		Other conditions may
-		NOT be considered erroneous, for example if a query cone is in the
-		Southern hemisphere and the catalog coverage is in the Northern
-		hemisphere. This type of query is different from an error return; it
-		should return a VOTable as described above, with metadata, but no data
-		records.
+If the service detects an exceptional condition, it \textbf{should} return
+an error document with an appropriate status code, as specified by DALI,
+with, possibly, a Content-Type header to tell the client the format of
+the document.
+
+In the case the error is expressed in VOTable format, recommendation
+expressed in Section 4.4 of DALI \textbf{should} be followed,
+inluding the OVERFLOW behaviour in case the MAXREC parameter is set.
+
+Errors \textbf{must} be reported in any of the following cases:
+\begin{itemize}
+	\item any of the three required paramaters (RA, DEC, SR) is missing;
+	\item	their values cannot be parsed to floating point numbers;
+	\item the value numbers are out of range (DEC=91.0, for example).
+\end{itemize}
+
+The service may also return an error if the search radius (given by the
+SR parameter) is larger than the one set by the maxSR element of the
+capability of the service described as a VO resource (see
+Sec.~\ref{sec:3}).
+
+Queries targeting no records \textbf{should not} generate an error
+response but an empty metadata one (if applicable by format).
 
 \section{The Resource Profile}
 \label{sec:3} 
