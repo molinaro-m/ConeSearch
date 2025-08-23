@@ -173,13 +173,15 @@ represented by a URL having two parts:\\
 		\item As defined by DALI a service SHOULD also understand the following parameters:
 			\begin{description}
 				\item[\textbf{MAXREC}] to let the client limit the number of records returned
-					or require a service metadata response. Its usage is encouraged and preferred
-					to the SR=0 solution for metadata discovery.
+					or require a service metadata response. Its usage with a value of 0 is encouraged
+					and preferred to the SR=0 solution for metadata discovery
+					\footnote{However, keep in mind that, for back-compatibility reasons, MAXREC
+					is optional and thus SR=0 needs to be accepted for metadata probing.}.
 				\item[\textbf{RESPONSEFORMAT}] to allow alternative optional response
 					formats other than the mandatory VOTable one. Indeed, a Simple
 					Cone Search service MUST provide responses in VOTable format \citep{2025ivoa.spec.0116O},
 					compliant with respect to what will
-					be detailed in the next subsection (Sec. 2.2), but should also
+					be detailed in the next subsection (Sec.~\ref{subsec:response}), but should also
 					support the DALI RESPONSEFORMAT parameter.
 			\end{description}
 		\item The query MAY contain the optional parameter,
@@ -227,11 +229,13 @@ available in the served source catalog:
 	\item one numerical column representing the main value for the
 		declination of the source in the ICRS coordinate system.
 \end{itemize}
+Right-ascension and declination of the output columns \textbf{MUST} be in decimal degrees.
 
 By default, the service \textbf{must} respond with an XML document in the
 VOTable\citep{2025ivoa.spec.0116O} format. However, if RESPONSEFORMAT is
 set (see Sec.~\ref{subsec:baseurl}) the response table \textbf{should}
-match the requested format, depending on the service capabilities.
+match the requested format; if this format is unsupported the request
+\tetxbf{should} fail.
 
 When the response is in the default VOTable format (see Appendix \ref{appendix:a}
 for an example), the MIME-type of the HTTP response \textbf{should} be
@@ -249,7 +253,9 @@ standard \citep{std:MIME}.
 Simple Cone Search services \textbf{MUST} return VOTable
 version 1 documents.
 
-The response in VOTable format \textbf{MUST} comply with these conditions:
+The response in VOTable format \textbf{MUST} follow the prescriptions on
+VOTable usage in result contained (currently) in Sec. 4.4 of the DALI 1.1
+specification. Moreover it \textbf{MUST} comply with these conditions:
 
 \begin{itemize}
 	\item There must be a single RESOURCE with \texttt{type=''results''} in the VOTable,
@@ -296,8 +302,7 @@ with, possibly, a Content-Type header to tell the client the format of
 the document.
 
 In the case the error is expressed in VOTable format, recommendation
-expressed in Section 4.4 of DALI \textbf{should} be followed,
-inluding the OVERFLOW behaviour in case the MAXREC parameter is set.
+expressed in Section 4.4 of DALI \textbf{should} be followed.
 
 Errors \textbf{must} be reported in any of the following cases:
 \begin{itemize}
