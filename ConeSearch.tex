@@ -173,10 +173,9 @@ represented by a URL having two parts:\\
 		\item As defined by DALI a service SHOULD also understand the following parameters:
 			\begin{description}
 				\item[\textbf{MAXREC}] to let the client limit the number of records returned
-					or require a service metadata response. Its usage with a value of 0 is encouraged
-					and preferred to the SR=0 solution for metadata discovery
-					\footnote{However, keep in mind that, for back-compatibility reasons, MAXREC
-					is optional and thus SR=0 needs to be accepted for metadata probing.}.
+					or require a service metadata response. That means that a
+					request including any of MAXREC or SR set with a value of 0 
+					should require a metadata response.
 				\item[\textbf{RESPONSEFORMAT}] to allow alternative optional response
 					formats other than the mandatory VOTable one. Indeed, a Simple
 					Cone Search service MUST provide responses in VOTable format \citep{2025ivoa.spec.0116O},
@@ -235,7 +234,7 @@ By default, the service \textbf{must} respond with an XML document in the
 VOTable\citep{2025ivoa.spec.0116O} format. However, if RESPONSEFORMAT is
 set (see Sec.~\ref{subsec:baseurl}) the response table \textbf{should}
 match the requested format; if this format is unsupported the request
-\textbf{should} fail.
+textbf{should} fail.
 
 When the response is in the default VOTable format (see Appendix \ref{appendix:a}
 for an example), the MIME-type of the HTTP response \textbf{should} be
