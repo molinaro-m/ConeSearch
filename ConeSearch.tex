@@ -234,7 +234,7 @@ By default, the service \textbf{must} respond with an XML document in the
 VOTable\citep{2025ivoa.spec.0116O} format. However, if RESPONSEFORMAT is
 set (see Sec.~\ref{subsec:baseurl}) the response table \textbf{should}
 match the requested format; if this format is unsupported the request
-textbf{should} fail.
+\textbf{should} fail.
 
 When the response is in the default VOTable format (see Appendix \ref{appendix:a}
 for an example), the MIME-type of the HTTP response \textbf{should} be
@@ -617,16 +617,11 @@ schemaas a formal part of the specification.
 
 \subsection*{Changes from WD-1.1-20200828}
 \begin{itemize}
-	\item prescribed DALI VOTable response usage, including error
-		responses and usage of the OVERFLOW indicator
-	\item added DALI MAXREC and RESPONSEFORMAT parameters, for response
-		flexibility and DALI alignment
+	\item included OVERFLOW indicator (updating MAXREC usage)
 	\item updated all UCD(s) to conform to the UCD1+ specification
-	\item introduced flexibility on the decimal (float or double) behaviour
-		for RA and Dec in responses (and explicitly stated that they must be
-		in units of decimal degrees)
-	\item clarified that the single RESOURCE with single table is meant
-		for results only, without preventing other RESOURCE types to be present
+	\item explicitly stated that RA and Dec responses must be
+		in units of decimal degrees
+	\item re-instated changes done in the previous WD-1.1-20200828
 	\item embedded errata 1, 2 and 3 for ConeSearch-1.03
 	\item Complete revert of changes to restore clean 1.03 contents,
 		in view of specific minor updates (listed here above)
