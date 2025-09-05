@@ -617,18 +617,16 @@ schemaas a formal part of the specification.
 
 \subsection*{Changes from WD-1.1-20200828}
 \begin{itemize}
-% 
-% remove the constraint of one RESOURCE only, clarifying it was there
-% only for the results
-%
-% added DALI MAXREC and RESPONSEFORMAT parameters, for response
-% flexibility and DALI alignment
-%
-% introduced flexibility on the decimal (float or double) behaviour for
-% RA and Dec in responses
-%
-% updated all UCD to conform to the UCD1+ specification
-%
+	\item prescribed DALI VOTable response usage, including error
+		responses and usage of the OVERFLOW indicator
+	\item added DALI MAXREC and RESPONSEFORMAT parameters, for response
+		flexibility and DALI alignment
+	\item updated all UCD(s) to conform to the UCD1+ specification
+	\item introduced flexibility on the decimal (float or double) behaviour
+		for RA and Dec in responses (and explicitly stated that they must be
+		in units of decimal degrees)
+	\item clarified that the single RESOURCE with single table is meant
+		for results only, without preventing other RESOURCE types to be present
 	\item embedded errata 1, 2 and 3 for ConeSearch-1.03
 	\item Complete revert of changes to restore clean 1.03 contents,
 		in view of specific minor updates (listed here above)
