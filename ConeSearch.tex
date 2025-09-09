@@ -160,7 +160,7 @@ represented by a URL having two parts:\\
 				\item[\textbf{SR}] the radius of the cone to search, given in decimal degrees.
 					If set to zero (SR=0) it should not return an error condition because the
 					request might describe an interest in retrieving only the metadata structure
-					of the service's response (i.e. discovery of the FIELDS delivered by the service).
+					of the service's response (i.e. discovery of the FIELDs delivered by the service).
 					This is similar to setting MAXREC=0, i.e. a service metadata request as prescribed
 					by DALI\footnote{SR=0 is kept in this version of this specification for back
 					compatibility. It is suggested to prefer the usage of MAXREC to enable metadata
@@ -260,7 +260,7 @@ specification. Moreover it \textbf{MUST} comply with these conditions:
 	\item There must be a single RESOURCE with \texttt{type=''results''} in the VOTable,
 		and that RESOURCE must contain a single TABLE. Additional RESOURCE(s) are
 		allowed to enable, e.g., DataLink service descriptors.
-	\item The TABLE must have FIELDS where
+	\item The TABLE must have FIELDs where
 		the following UCD values have been set. There must only be one FIELD
 		with each of these UCDs:
 
