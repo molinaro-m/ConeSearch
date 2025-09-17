@@ -113,13 +113,13 @@ the requirements described in the following 3 subsections
 \subsection{Query resource}
 \label{subsec:baseurl}
 
-The service must respond to a HTTP GET request
+The service must respond to a HTTP (or HTTPS) GET request
 represented by a URL having two parts:\\ 
 
 	\begin{itemize}
 		\item A base URL of the form\\
 		
-		\url{http://<server-address>/<path>?[<extra-GET-arg>&[...]]}\\
+		\url{http[s]://<server-address>/<path>?[<extra-GET-arg>&[...]]}\\
 		
 			where <server-address> and <path> are URI-compliant components
 			indicating the domain address and local location path where the service
@@ -133,7 +133,7 @@ represented by a URL having two parts:\\
 		
 		\begin{bigdescription}
 			\item[Examples]
-				\url{http://mycone.org/cgi-bin/VOsearch?}\\
+				\url{https://mycone.org/cgi-bin/VOsearch?}\\
 				\url{http://adil.ncsa.uiuc.edu/vocone?resolv&issurvey=T&}
 		\end{bigdescription} 
 		
@@ -168,7 +168,7 @@ represented by a URL having two parts:\\
 			\end{description}
 			\begin{bigdescription}
 				\item[Example]
-					\url{http://mycone.org/cgi-bin/search?RA=180.567&DEC=-30.45&SR=0.0125}
+					\url{https://mycone.org/cgi-bin/search?RA=180.567&DEC=-30.45&SR=0.0125}
 			\end{bigdescription}
 		\item As defined by DALI a service SHOULD also understand the following parameters:
 			\begin{description}
