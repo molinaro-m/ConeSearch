@@ -202,7 +202,9 @@ represented by a URL having two parts:\\
 		\item There may be other parameters in the query, but this document does not
 			specify their meaning or usage. If a query includes an optional parameter,
 			either one specified by this document or not, that is not supported by
-			the service implementation, the service must ignore that parameter.
+			the service implementation, the service can ignore it. In this
+			case it is encouraged to add an INFO element in the response to 
+			include the parsing report for the ignored parameter. 
 	\end{itemize}
 	
 	A query following this syntax represents a request for
