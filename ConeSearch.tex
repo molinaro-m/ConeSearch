@@ -113,13 +113,13 @@ the requirements described in the following 3 subsections
 \subsection{Query resource}
 \label{subsec:baseurl}
 
-The service must respond to a HTTP GET request
+The service must respond to a HTTP (or HTTPS) GET request
 represented by a URL having two parts:\\ 
 
 	\begin{itemize}
 		\item A base URL of the form\\
 		
-		\url{http://<server-address>/<path>?[<extra-GET-arg>&[...]]}\\
+		\url{http[s]://<server-address>/<path>?[<extra-GET-arg>&[...]]}\\
 		
 			where <server-address> and <path> are URI-compliant components
 			indicating the domain address and local location path where the service
@@ -133,7 +133,7 @@ represented by a URL having two parts:\\
 		
 		\begin{bigdescription}
 			\item[Examples]
-				\url{http://mycone.org/cgi-bin/VOsearch?}\\
+				\url{https://mycone.org/cgi-bin/VOsearch?}\\
 				\url{http://adil.ncsa.uiuc.edu/vocone?resolv&issurvey=T&}
 		\end{bigdescription} 
 		
@@ -168,7 +168,7 @@ represented by a URL having two parts:\\
 			\end{description}
 			\begin{bigdescription}
 				\item[Example]
-					\url{http://mycone.org/cgi-bin/search?RA=180.567&DEC=-30.45&SR=0.0125}
+					\url{https://mycone.org/cgi-bin/search?RA=180.567&DEC=-30.45&SR=0.0125}
 			\end{bigdescription}
 		\item As defined by DALI a service SHOULD also understand the following parameters:
 			\begin{description}
@@ -202,7 +202,9 @@ represented by a URL having two parts:\\
 		\item There may be other parameters in the query, but this document does not
 			specify their meaning or usage. If a query includes an optional parameter,
 			either one specified by this document or not, that is not supported by
-			the service implementation, the service must ignore that parameter.
+			the service implementation, the service can ignore it. In this
+			case it is encouraged to add an INFO element in the response to 
+			include the parsing report for the ignored parameter. 
 	\end{itemize}
 	
 	A query following this syntax represents a request for
