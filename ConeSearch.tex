@@ -4,7 +4,7 @@
 \usepackage{todonotes}
 
 \usepackage{listings}
-\lstloadlanguages{XML,sh}
+\lstloadlanguages{XML,sh,SQL}
 \lstset{flexiblecolumns=true,tagstyle=\ttfamily, showstringspaces=False}
 
 \usepackage{multirow}
@@ -325,11 +325,26 @@ response but an empty metadata one (if applicable by format).
 
 To describe a Cone Search service as a VOResource record the service
 provider \textbf{must} follow the 
-SimpleDALRegExt\citep{2022ivoa.spec.0222D} Recommendation (version 1.2
+SimpleDALRegExt \citep{2022ivoa.spec.0222D} Recommendation (version 1.2
 at the time of writing).
 More in detail, Section 2 (common requirements for Simple DAL Services)
 and Section 3.1 (for the specific extension definition for
 Simple Cone Search) must be followed.
+
+ConeSearch services, described as above, should be discoverable by means
+of queries to a Registry RegTAP \citep{2024ivoa.spec.1002D} interface, like:
+\begin{lstlisting}[language=SQL]
+SELECT ivoid, res_title, access_url, std_version
+FROM rr.resource
+  NATURAL JOIN rr.capability
+  NATURAL JOIN rr.interface 
+WHERE standard_id like 'ivo://ivoa.net/std/conesearch%'
+\end{lstlisting}
+
+The \texttt{std\_version} attribute (i.e the version of the interface's
+capability) could help, if present on the registered resource, to inform
+the client application about the ConeSearch version the service is
+following.
 
 \appendix
 
@@ -426,6 +441,7 @@ This is a sample of a legal response to a Cone Search query.
 
 \subsection*{Changes from WD-1.1-20200828}
 \begin{itemize}
+	\item replaced resource description with SimpleDALRegExt references
 	\item clarified response behaviour when dealing with optional
 parameters
 	\item	exemplified/explicited HTTPS being allowed
