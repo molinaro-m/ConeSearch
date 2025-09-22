@@ -338,7 +338,9 @@ SELECT ivoid, res_title, access_url, std_version
 FROM rr.resource
   NATURAL JOIN rr.capability
   NATURAL JOIN rr.interface 
-WHERE standard_id like 'ivo://ivoa.net/std/conesearch%'
+WHERE
+  standard_id LIKE 'ivo://ivoa.net/std/conesearch%'
+  AND intf_role='std'
 \end{lstlisting}
 
 The \texttt{std\_version} attribute (i.e the version of the interface's
