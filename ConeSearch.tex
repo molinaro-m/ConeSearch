@@ -203,8 +203,14 @@ represented by a URL having two parts:\\
 			specify their meaning or usage. If a query includes an optional parameter,
 			either one specified by this document or not, that is not supported by
 			the service implementation, the service can ignore it. In this
-			case it is encouraged to add an INFO element in the response to 
-			include the parsing report for the ignored parameter. 
+			case it is encouraged to add, in the response, an INFO element with the
+			\verb|name| attribute set to \verb|warning| to include the parsing report
+			for the ignored parameter, like:
+			\begin{lstlisting}[language=XML]
+<INFO name="warning" 
+      value="Unrecognized optional/custom parameters.
+      Ignored: TIME, MAG_V"/>
+			\end{lstlisting}
 	\end{itemize}
 	
 	A query following this syntax represents a request for
