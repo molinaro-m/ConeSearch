@@ -161,10 +161,11 @@ represented by a URL having two parts:\\
 					If set to zero (SR=0) it should not return an error condition because the
 					request might describe an interest in retrieving only the metadata structure
 					of the service's response (i.e. discovery of the FIELDs delivered by the service).
-					This is similar to setting MAXREC=0, i.e. a service metadata request as prescribed
-					by DALI\footnote{SR=0 is kept in this version of this specification for back
-					compatibility. It is suggested to prefer the usage of MAXREC to enable metadata
-					discovery}\citep{2017ivoa.spec.0517D}.
+					Returning data alongside metadata with SR=0 is also allowed.
+					The metadata enquiry behaviour is similar to setting MAXREC=0, i.e. a service
+					metadata request as prescribed 	by DALI\footnote{SR=0 is kept in this version 
+					of this specification for back compatibility. It is suggested to prefer the
+					usage of MAXREC to enable metadata discovery} \citep{2017ivoa.spec.0517D}.
 			\end{description}
 			\begin{bigdescription}
 				\item[Example]
@@ -173,9 +174,7 @@ represented by a URL having two parts:\\
 		\item As defined by DALI a service SHOULD also understand the following parameters:
 			\begin{description}
 				\item[\textbf{MAXREC}] to let the client limit the number of records returned
-					or require a service metadata response. That means that a
-					request including any of MAXREC or SR set with a value of 0 
-					should require a metadata response.
+					or require a service metadata response.
 				\item[\textbf{RESPONSEFORMAT}] to allow alternative optional response
 					formats other than the mandatory VOTable one. Indeed, a Simple
 					Cone Search service MUST provide responses in VOTable format \citep{2025ivoa.spec.0116O},
@@ -452,7 +451,7 @@ This is a sample of a legal response to a Cone Search query.
 	\item replaced resource description with SimpleDALRegExt references
 	\item clarified response behaviour when dealing with optional
 parameters
-	\item	exemplified/explicited HTTPS being allowed
+	\item exemplified/explicited HTTPS being allowed
 	\item included OVERFLOW indicator (updating MAXREC usage)
 	\item updated all UCD(s) to conform to the UCD1+ specification
 	\item explicitly stated that RA and Dec responses must be
