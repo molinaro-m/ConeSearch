@@ -227,9 +227,7 @@ sources outside the cone.
 The response table \textbf{must} contain, alongside all possible columns
 available in the served source catalog:
 \begin{itemize}
-	\item one string column representing an ID for that record of the table.
-		This identifier may not be repeated in the table, and it could be used to
-		retrieve that same record again from that same table;
+	\item one string column representing an identifier for that record of the table;
 	\item one numerical column representing the main value for the
 		right-ascension of the source in the ICRS coordinate system;
 	\item one numerical column representing the main value for the
@@ -275,8 +273,8 @@ specification. Moreover it \textbf{MUST} comply with these conditions:
 		\item Exactly one FIELD must have ucd="meta.id;meta.main",
 	 		with an array character type (fixed or variable
 			length), representing an ID string for that record of the table. This
-			identifier may not be repeated in the table, and it could be used to
-			retrieve that same record again from that same table.
+			identifier could be used to retrieve that same record again from 
+			that same table; the identifier string may be repeated;
 		\item Exactly one FIELD must have ucd="pos.eq.ra;meta.main",
 			representing the right-ascension of the source in the ICRS coordinate system.
 		\item Exactly one FIELD must have ucd="pos.eq.dec;meta.main",
@@ -448,6 +446,7 @@ This is a sample of a legal response to a Cone Search query.
 
 \subsection*{Changes from WD-1.1-20200828}
 \begin{itemize}
+	\item intentionally moved "may not" into "may" for main ID repeatability
 	\item replaced resource description with SimpleDALRegExt references
 	\item clarified response behaviour when dealing with optional
 parameters
