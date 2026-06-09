@@ -101,7 +101,26 @@ specification.}
 \end{figure}
 
 Fig.~\ref{fig:archdiag} shows the role this document plays within the
-IVOA architecture \citep{2021ivoa.spec.1101D}.
+IVOA architecture \citep{2024ivoa.spec.1114E}.
+
+ConeSearch-1.1 makes use of the following standards:
+
+\begin{bigdescription}
+\item[DALI] \citet{2017ivoa.spec.0517D} gives the basic rules all modern
+DAL protocols have to follow. This revision of the ConeSearch is meant to
+align as much as possible with it.
+
+\item[VOTable] \citet{2025ivoa.spec.0116O} defines the mandatory response
+format for ConeSearch services. 
+
+\item[UCD] \citet{2005ivoa.spec.0819D} gives a lightweight semantic
+annotation that allows clients to identify the main elements in the
+ConeSearch results.
+
+\item[SimpleDALRegExt] \citet{2022ivoa.spec.0222D} currently contains
+the metadata schema used to register ConeSearch version 1 services.
+
+\end{bigdescription}
 
 \section{Service Interface Requirements}
 \label{sec:2}
