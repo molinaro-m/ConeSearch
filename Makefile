@@ -27,7 +27,7 @@ FIGURES = role_diagram.svg
 
 # List of PDF figures (figures that must be converted to pixel images to
 # work in web browsers).
-VECTORFIGURES = role_diargam.pdf
+VECTORFIGURES = role_diagram.pdf
 
 # Additional files to distribute (e.g., CSS, schema files, examples...)
 AUX_FILES =
