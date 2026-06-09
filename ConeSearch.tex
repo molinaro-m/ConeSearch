@@ -356,85 +356,71 @@ following.
 \section{Sample VOTable Response}
 \label{appendix:a}
 
-This is a sample of a legal response to a Cone Search query.
+This is a sample of a legal response to a Cone Search query, freely modified
+from an actual query to the SIMBAD Simple Cone Search interface.
 
-\begin{lstlisting}[language=XML,basicstyle=\footnotesize] 
-<?xml version="1.0"?>
-<!DOCTYPE VOTABLE SYSTEM "http://us-vo.org/xml/VOTable.dtd">
-<VOTABLE version="1.0">
-  <DEFINITIONS>
-    <COOSYS system="eq_FK5" equinox="2000" />
-  </DEFINITIONS>
-  <RESOURCE ID="T9001">
-    <DESCRIPTION>
-      HEASARC Browse data service
-      Please send inquiries to mailto:request@athena.gsfc.nasa.gov
-    </DESCRIPTION>
-    <PARAM ID="default_search_radius" ucd="phys.angSize;obs" 
-      datatype="double" value="0.0516666666666667" />
-    <TABLE ID="heasarc_first_9001">
-      <DESCRIPTION>
-        Faint Images of the Radio Sky at Twenty cm Source Catalog (FIRST)
-      </DESCRIPTION>
-      <FIELD name="unique_id" datatype="char" arraysize="*" ucd="meta.id;meta.main">
-        <DESCRIPTION>Integer key</DESCRIPTION>
+\begin{lstlisting}[language=XML,basicstyle=\footnotesize]
+<?xml version="1.0" encoding="utf-8"?>
+<VOTABLE version="1.4" 
+  xmlns="http://www.ivoa.net/xml/VOTable/v1.3" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 
+          http://www.ivoa.net/xml/VOTable/votable-1.4.xsd">
+  <RESOURCE name="simbad_cone-search_result" type="results">
+    <INFO name="standardID" 
+      value="ivo://ivoa.net/std/conesearch">IVOID of the service specification</INFO>
+    <INFO name="data_ivoid" 
+      value="ivo://cds.simbad">IVOID of underlying data collection</INFO>
+    <INFO name="publisher"
+      value="CDS/SIMBAD">Data centre that produced the VOTable</INFO>
+    <INFO name="article" 
+      value="10.1051/aas:2000332">Bibcode or DOI of a reference article</INFO>
+    <INFO name="server_software" 
+      value="SIMBAD-ConeSearch/2.7-SNAPSHOT (Strasbourg)">Software version</INFO>
+    <INFO name="service_protocol" value="ivo://ivoa.net/std/conesearch">
+      IVOID of the protocol through which the data was retrieved</INFO>
+    <INFO name="request" 
+      value="https://simbad.cds.unistra.fr/cone/
+             ?RA=10.684709&DEC=41.26875&SR=0.01666&VERB=1&MAXREC=2000"">
+      Request URL including a query string</INFO>
+    <INFO name="request_date" 
+      value="2026-06-09T06:09:04.156417Z">Query execution date</INFO>
+    <INFO name="contact" 
+      value="cds-question@unistra.fr">Email or URL to contact publisher</INFO>
+    <INFO name="QUERY_STATUS" value="OK">Successful query</INFO>
+    <COOSYS ID="SIMBAD-COOSYS" system="ICRS" epoch="J2000" equinox="2000"/>
+    <TABLE>
+      <FIELD name="distance"
+        datatype="float" ucd="pos.angDistance" unit="deg">
+        <DESCRIPTION>
+	  Distance (in degrees) between this object and the cone-search's target.
+	</DESCRIPTION>
       </FIELD>
-      <FIELD name="name" datatype="char" arraysize="*">
-        <DESCRIPTION>FIRST Source Designation</DESCRIPTION>
+      <FIELD ID="main_id" name="main_id" 
+        arraysize="*" datatype="char" ucd="meta.id;meta.main">
+        <DESCRIPTION>Main identifier for an object</DESCRIPTION>
       </FIELD>
-      <FIELD name="ra" datatype="double" unit="degree" ucd="pos.eq.ra;meta.main">
-        <DESCRIPTION>Right Ascension</DESCRIPTION>
+      <FIELD name="ra"
+        datatype="double" ref="SIMBAD-COOSYS" ucd="pos.eq.ra;meta.main" unit="deg">
+        <DESCRIPTION>Right ascension</DESCRIPTION>
       </FIELD>
-      <FIELD name="dec" datatype="double" unit="degree" ucd="pos.eq.dec;meta.main">
+      <FIELD name="dec" 
+        datatype="double" ref="SIMBAD-COOSYS" ucd="pos.eq.dec;meta.main" unit="deg">
         <DESCRIPTION>Declination</DESCRIPTION>
       </FIELD>
-      <FIELD name="flux_20_cm" datatype="double" unit="mJy">
-        <DESCRIPTION>Peak 1.4GHz Flux Density (mJy)</DESCRIPTION>
-      </FIELD>
-      <FIELD name="flux_20_cm_error" datatype="double" unit="mJy">
-        <DESCRIPTION>Estimated rms in at Source (mJy)</DESCRIPTION>
-      </FIELD>
-      <FIELD name="int_flux_20_cm" datatype="double" unit="mJy">
-        <DESCRIPTION>Integrated 1.4GHz Flux Density (mJy)</DESCRIPTION>
-      </FIELD>
+      <FIELD arraysize="*" datatype="char" name="otype"/>
+      <FIELD datatype="int" name="biblist"/>
       <DATA>
         <TABLEDATA>
           <TR>
-            <TD>384559</TD>
-            <TD>FIRST J120002.6+595708</TD>
-            <TD>180.0110042</TD>
-            <TD>59.9523889</TD>
-            <TD>1.11</TD>
-            <TD>0.139</TD>
-            <TD>1.14</TD>
+            <TD>7.879335328886527E-7</TD>
+            <TD>M  31</TD>
+            <TD>10.6847083</TD>
+            <TD>41.2687500</TD>
+            <TD>AGN</TD>
+            <TD>13679</TD>
           </TR>
-          <TR>
-            <TD>385094</TD>
-            <TD>FIRST J120025.3+600103</TD>
-            <TD>180.1057250</TD>
-            <TD>60.0175556</TD>
-            <TD>2.89</TD>
-            <TD>0.142</TD>
-            <TD>2.56</TD>
-            </TR>
-          <TR>
-            <TD>384928</TD>
-            <TD>FIRST J120018.1+600236</TD>
-            <TD>180.0755500</TD>
-            <TD>60.0434750</TD>
-            <TD>19.38</TD>
-            <TD>0.145</TD>
-            <TD>19.23</TD>
-          </TR>
-          <TR>
-            <TD>384490</TD>
-            <TD>FIRST J115959.4+600403</TD>
-            <TD>179.9978875</TD>
-            <TD>60.0677083</TD>
-            <TD>1.01</TD>
-            <TD>0.147</TD>
-            <TD>1.20</TD>
-          </TR>
+          ...
         </TABLEDATA>
       </DATA>
     </TABLE>
