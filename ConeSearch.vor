@@ -78,7 +78,7 @@
             decimal degrees. 
          </description>
 	 <unit>deg</unit>
-      <dataType xsi:type="SimpleDataType">real</dataType>
+      <dataType xsi:type="vs:SimpleDataType">real</dataType>
     </param>
     <param use="required">
       <name>DEC</name>
@@ -88,7 +88,7 @@
             decimal degrees. 
          </description>
       <unit>deg</unit>
-      <dataType xsi:type="SimpleDataType">real</dataType>
+      <dataType xsi:type="vs:SimpleDataType">real</dataType>
     </param>
     <param use="required">
       <name>SR</name>
@@ -96,28 +96,28 @@
            The radius of the cone to search, given in decimal degrees.
          </description>
       <unit>deg</unit>
-      <dataType xsi:type="SimpleDataType">real</dataType>
+      <dataType xsi:type="vs:SimpleDataType">real</dataType>
     </param>
     <param use="optional">
       <name>MAXREC</name>
       <description>
            Limit of the number of records returned by the service.
          </description>
-      <dataType xsi:type="SimpleDataType">integer</dataType>
+      <dataType xsi:type="vs:SimpleDataType">integer</dataType>
     </param>
     <param use="optional">
       <name>RESPONSEFORMAT</name>
       <description>
            Alternative optional response formats other than the mandatory VOTable one.
          </description>
-      <dataType xsi:type="SimpleDataType">string</dataType>
+      <dataType xsi:type="vs:SimpleDataType">string</dataType>
     </param>
     <param use="optional">
       <name>VERB</name>
       <description>
            The level of verbosity in the output.
          </description>
-      <dataType xsi:type="SimpleDataType">integer</dataType>
+      <dataType xsi:type="vs:SimpleDataType">integer</dataType>
     </param>
   </interface>
 </ri:Resource>
