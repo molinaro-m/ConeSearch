@@ -8,7 +8,7 @@ DOCNAME = ConeSearch
 DOCVERSION = 1.1
 
 # Publication date, ISO format; update manually for "releases"
-DOCDATE = 2023-08-29
+DOCDATE = 2026-06-09
 
 # What is it you're writing: NOTE, WD, PR, REC, PEN, or EN
 DOCTYPE = WD
@@ -23,11 +23,11 @@ SOURCES = $(DOCNAME).tex gitmeta.tex
 
 # List of image files to be included in submitted package (anything that
 # can be rendered directly by common web browsers)
-FIGURES =
+FIGURES = 
 
 # List of PDF figures (figures that must be converted to pixel images to
 # work in web browsers).
-VECTORFIGURES =
+VECTORFIGURES = role_diagram.pdf
 
 # Additional files to distribute (e.g., CSS, schema files, examples...)
 AUX_FILES =

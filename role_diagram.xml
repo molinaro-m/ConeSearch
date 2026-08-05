@@ -37,14 +37,14 @@ of the various sections) to have the box centered.
 
 <archdiag xmlns="http://ivoa.net/archdiag">
   <!-- Registry: x=55, y=150..450 -->
-  <rec name="VOResource" x="64.5" y="155" w="71"/>
-  <rec name="Resource M.D." x="58" y="230" w="84"/>
+  <rec name="SimpleDALRE" x="61" y="400" w="78"/>
 
   <!-- Apps: all over the place -->
   <rec name="VOTable" x="270" y="325" w="50"/>
 
   <!-- DAL: x=655, y=155..435 -->
   <thisrec name="ConeSearch" x="665.5" y="155" w="69"/>
+  <rec name="DALI" x="310" y="290" w="33"/>
 
   <!-- Data Models: x=430..580, y=250..400 -->
 
